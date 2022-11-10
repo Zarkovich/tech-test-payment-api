@@ -16,7 +16,7 @@ namespace tech_test_payment_api.Controllers
             return Ok(venda);
         }
 
-        [HttpGet("totalvendas")]
+        [HttpGet("TotalVendas")]
         public IActionResult TotalVendas()
         {
             var venda = VendasContext.TotalVendas();
@@ -32,13 +32,17 @@ namespace tech_test_payment_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizarStatus(int id, string newstatus = "att")
+        public IActionResult AtualizarStatus(int id, string newStatus)
         {
 
             var venda = VendasContext.TotalVendas().Find(x => x.IdVenda == id);
 
             if (venda.Status == "Entregue") return Ok(venda);
-            venda.Status = newstatus;
+
+            if (newStatus == null || newStatus == "") venda.Status = "att";
+
+            else
+                venda.Status = newStatus;
 
             return Ok(venda);
         }
