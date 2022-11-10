@@ -9,6 +9,8 @@ namespace tech_test_payment_api.Context
 
         public static void AdicionarVenda(Venda venda)
         {
+            if (venda.Itens.Length == 0) throw new Exception("Carrinho Vazio");
+
             Vendas.Add(venda);
         }
 
